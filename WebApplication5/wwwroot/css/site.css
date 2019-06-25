@@ -53,15 +53,6 @@ button.accept-policy {
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
 .footer {
   position: absolute;
   bottom: 0;
@@ -69,3 +60,87 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, #4568dc, #b06ab3);
+    color: #D7D7EF;
+    font-family: 'Lato', sans-serif;
+}
+
+h2 {
+    margin: 50px 0;
+}
+
+section {
+    flex-grow: 1;
+}
+
+.file-drop-area {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 450px;
+    max-width: 100%;
+    padding: 25px;
+    border: 1px dashed rgba(255, 255, 255, 0.4);
+    border-radius: 3px;
+    transition: 0.2s;
+}
+
+    .file-drop-area.is-active {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+.fake-btn {
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    padding: 8px 15px;
+    margin-right: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.file-msg {
+    font-size: small;
+    font-weight: 300;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    opacity: 0;
+}
+
+    .file-input:focus {
+        outline: none;
+    }
+
+footer {
+    margin-top: 50px;
+}
+
+    footer a {
+        color: rgba(255, 255, 255, 0.4);
+        font-weight: 300;
+        font-size: 14px;
+        text-decoration: none;
+    }
+
+        footer a:hover {
+            color: white;
+        }

@@ -60,13 +60,11 @@ namespace WebApplication5.Controllers
 
                 task.Progress.ProgressChanged += (s, e) => Console.WriteLine($"Progress: {e.Percentage} %");
 
-                // cancel the upload
-                // cancellation.Cancel();
 
                 try
                 {
-                    // error during upload will be thrown when you await the task
-                    Console.WriteLine("Download link:\n" + await task);
+                    ViewBag.link = await task;
+                    return Ok();
                 }
                 catch (Exception ex)
                 {
@@ -74,8 +72,6 @@ namespace WebApplication5.Controllers
                 }
 
             }
-
-
             return BadRequest();
         }
 
