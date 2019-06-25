@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewData["Title"] = "FaviconUpload";
+}
+
+<h1>FaviconUpload</h1>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    .alert {
+        opacity: 1;
+        animation-name: fadeInOpacity;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-out;
+        animation-duration: 1s;
+    }
+
+    @@keyframes fadeInOpacity {
+        0% {
+            opacity: 0;
+        }
+
+        25% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.3;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+</style>
+
+<h1>Index</h1>
+@ViewBag.error
+@*@foreach (var item in Model)
+    {
+        <img src="@item.Source" id="displayimage" width="80" class="img-fluid img-thumbnail" />
+    }*@
+
+<div class="form-group">
+    <label for="logoupload">Example file input</label>
+    <input type="file" class="form-control-file" id="logoupload">
+</div>
+
+<div class="notification"></div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            let onchange = function () {
+                let _this = $(this)[0];
+
+                let frmdata = new FormData();
+                frmdata.append('File', _this.files[0]);
+
+                $("#logoupload").change(function () {
+                    readURL(this);
+                });
+                let onSuccess = function (model) {
+                    console.log(model);
+                    $('.notification').html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Logo&nbsp;</strong>Sucessfully uploaded!!!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+                };
+
+                $.ajax({
+                    method: 'POST',
+                    url: '/home/index',
+                    data: frmdata,
+                    processData: false,
+                    contentType: false,
+                }).done(onSuccess);
+            };
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#displayimage').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $(document).on('change', 'input[type=file]', onchange);
+        });
+    </script>
+}
